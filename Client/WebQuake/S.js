@@ -740,7 +740,7 @@ S.LoadSound = function(s)
 		return;
 	}
 	var p, fmt, dataofs, datalen, cue, loopstart, samples;
-	for (p = 12; p < data.byteLength; )
+	for (p = 12; p + 8 <= data.byteLength; ) // arcade: stop at a truncated trailing chunk header (LibreQuake wavs) instead of throwing
 	{
 		switch (view.getUint32(p, true))
 		{
