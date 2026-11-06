@@ -745,6 +745,8 @@ S.LoadSound = function(s)
 		switch (view.getUint32(p, true))
 		{
 		case 0x20746d66: // fmt
+			if (p + 24 > data.byteLength)
+				break; // arcade: truncated chunk
 			if (view.getInt16(p + 8, true) !== 1)
 			{
 				Con.Print('Microsoft PCM format only\n');
@@ -763,6 +765,8 @@ S.LoadSound = function(s)
 			datalen = view.getUint32(p + 4, true);
 			break;
 		case 0x20657563: // cue
+			if (p + 36 > data.byteLength)
+				break; // arcade: truncated chunk
 			cue = true;
 			loopstart = view.getUint32(p + 32, true);
 			break;
@@ -770,6 +774,8 @@ S.LoadSound = function(s)
 			if (cue !== true)
 				break;
 			cue = false;
+			if (p + 32 > data.byteLength)
+				break; // arcade: truncated chunk
 			if (view.getUint32(p + 28, true) === 0x6b72616d)
 				samples = loopstart + view.getUint32(p + 24, true);
 			break;
