@@ -1,6 +1,6 @@
 Sys = {};
 
-Sys.events = ['onbeforeunload', 'oncontextmenu', 'onfocus', 'onkeydown', 'onkeyup', 'onmousedown', 'onmouseup', 'onmousewheel', 'onunload', 'onwheel'];
+Sys.events = ['onbeforeunload', 'oncontextmenu', 'onfocus', 'onkeydown', 'onkeyup', 'onmousedown', 'onmouseup', 'onmousewheel', 'onpagehide', 'onwheel'];
 
 Sys.Quit = function()
 {
@@ -237,7 +237,7 @@ Sys.onmousewheel = function(e)
 	e.preventDefault();
 };
 
-Sys.onunload = function()
+Sys.onpagehide = function() // arcade: 'unload' handlers are blocked by Chrome's permissions policy; pagehide does the same job
 {
 	Host.Shutdown();
 };
